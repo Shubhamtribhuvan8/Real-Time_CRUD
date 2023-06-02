@@ -15,8 +15,6 @@ app.use(cors());
 
 io.on("connection", (socket) => {
   console.log("New client connected");
-
-  // Handle real-time CRUD events
   socket.on("createRecord", (record) => {
     // Broadcast the new record to all connected clients
     io.emit("recordCreated", record);
