@@ -15,9 +15,25 @@ app.use(cors());
 
 io.on("connection", (socket) => {
   console.log("New client connected");
+
+  // Handle real-time CRUD events
+  socket.on("createRecord", (record) => {
+    // Broadcast the new record to all connected clients
+    io.emit("recordCreated", record);
+  });
+
+  socket.on("updateRecord", (record) => {
+    // Broadcast the updated record to all connected clients
+    io.emit("recordUpdated", record);
+  });
+
+  socket.on("deleteRecord", (recordId) => {
+    // Broadcast the deleted record ID to all connected clients
+    io.emit("recordDeleted", recordId);
+  });
 });
 
-app.use("/api", router);
+app.use("/record", router);
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => {
