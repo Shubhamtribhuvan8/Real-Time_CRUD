@@ -1,6 +1,6 @@
-export function Action(dispatch, payload) {
+export function setAllDetails(dispatch, payload) {
   dispatch({
-    type: "GET",
+    type: "SET_ALL_DETAILS",
     payload: payload,
   });
 }

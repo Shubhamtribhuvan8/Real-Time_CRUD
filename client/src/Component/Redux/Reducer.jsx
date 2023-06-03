@@ -6,7 +6,7 @@ const initialState = {
 
 const Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET":
+    case "SET_ALL_DETAILS":
       return { ...state, AllDetails: action.payload };
 
     case "PUT_CART":
