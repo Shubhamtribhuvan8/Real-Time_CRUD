@@ -30,8 +30,8 @@ function PostComponent() {
     const data = new FormData();
     const selectedImage = e.target.files[0];
     data.append("file", selectedImage);
-    data.append("upload_preset", "Record");
-    data.append("cloud_name", "dq1zrwz3r");
+    data.append("upload_preset", "Tumblr");
+    data.append("cloud_name", "dgqt5ockx");
     setDataImage(data);
     setPreviewImage(URL.createObjectURL(selectedImage));
   };
@@ -39,7 +39,7 @@ function PostComponent() {
   const CloudinaryUpload = async (data) => {
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dq1zrwz3r/image/upload",
+        "https://api.cloudinary.com/v1_1/dgqt5ockx/image/upload",
         data
       );
       setImageUrl(response.data.url);
@@ -48,7 +48,6 @@ function PostComponent() {
       console.log(error);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -57,15 +56,13 @@ function PostComponent() {
       return;
     }
 
-    const data = {
-      title: username,
-      description: description,
-      images: [], // Initialize the images array as empty
-    };
-
     try {
       await CloudinaryUpload(dataImage);
-      data.images.push(imageUrl);
+      const data = {
+        title: username,
+        description: description,
+        images: imageUrl,
+      };
       console.log("cloudinary ke andar", imageUrl);
       const response = await axios.post("http://localhost:8080/record", data);
       console.log(response.data);
@@ -75,7 +72,6 @@ function PostComponent() {
       toast.error("Post failed to add!");
     }
   };
-
   return (
     <div>
       <br />

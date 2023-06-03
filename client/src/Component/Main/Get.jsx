@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable no-use-before-define */
 import React, { useEffect } from "react";
 import axios from "axios";
@@ -11,7 +13,6 @@ function GetComponent() {
       try {
         const response = await axios.get("http://localhost:8080/record");
         console.log(response.data);
-        // dispatch(setAllDetails(response.data));
         setAllDetails(dispatch, response.data);
       } catch (error) {
         console.error(error);
@@ -21,6 +22,7 @@ function GetComponent() {
   }, [dispatch]);
 
   const data = useSelector((Store) => Store.AllDetails);
+  console.log(data);
   return (
     <div>
       {data &&
@@ -28,10 +30,12 @@ function GetComponent() {
           <div key={record._id}>
             <h2>{record.title}</h2>
             <p>{record.description}</p>
-            {record.images.map((image) => (
-              // eslint-disable-next-line jsx-a11y/img-redundant-alt
-              <img key={image} src={image} alt="Record Image" />
-            ))}
+            <img
+              src={record.images}
+              width={250}
+              height={250}
+              alt="Record Image"
+            />
           </div>
         ))}
     </div>
