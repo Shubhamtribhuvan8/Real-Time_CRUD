@@ -69,7 +69,7 @@ function PutComponent({ _id }) {
         images: imagefinal,
       };
       const response = await axios.put(
-        `http://localhost:8080/record/${_id}`,
+        `https://dull-plum-stingray-suit.cyclic.app/record/${_id}`,
         data
       );
       console.log(response.data);
