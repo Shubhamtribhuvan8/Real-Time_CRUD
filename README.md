@@ -32,13 +32,13 @@ To run this application locally, you need to have the following installed on you
     Node.js: Install Node.js from the official website.
     MongoDB: Install MongoDB either locally or use a cloud-based service like Mongo Atlas.
 
-Installation
+# Installation
 
     Clone the repository:
 
     bash
 
-git clone https://github.com/your-username/your-repo.git
+git clone `https://github.com/Shubhamtribhuvan8/Real-Time_CRUD.git`
 
 Navigate to the project directory:
 
@@ -53,7 +53,7 @@ bash
 cd backend
 npm install
 
-Install the frontend dependencies:
+# Install the frontend dependencies:
 
 bash
 
@@ -93,7 +93,7 @@ bash
 
     Open your browser and navigate to http://localhost:3000 to access the application.
 
-Folder Structure
+# Folder Structure
 
 The project has the following folder structure:
 
