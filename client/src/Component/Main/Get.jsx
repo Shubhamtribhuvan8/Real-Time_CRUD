@@ -15,7 +15,6 @@ import PutComponent from "./Put";
 
 const GetComponent = () => {
   const dispatch = useDispatch();
-  const data = useSelector((store) => store.AllDetails);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -48,7 +47,7 @@ const GetComponent = () => {
       toast.error("Failed to delete record");
     }
   };
-
+  const data = useSelector((store) => store.AllDetails);
   return (
     <div
       style={{
