@@ -11,10 +11,12 @@ dotenv.config();
 connection();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 
+// Socket.IO event handlers
 io.on("connection", (socket) => {
   console.log("New client connected");
+
   socket.on("createRecord", (record) => {
     // Broadcast the new record to all connected clients
     io.emit("recordCreated", record);
@@ -28,6 +30,10 @@ io.on("connection", (socket) => {
   socket.on("deleteRecord", (recordId) => {
     // Broadcast the deleted record ID to all connected clients
     io.emit("recordDeleted", recordId);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
   });
 });
 

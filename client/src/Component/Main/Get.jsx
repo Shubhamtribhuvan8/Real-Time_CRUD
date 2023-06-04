@@ -36,12 +36,12 @@ const GetComponent = () => {
     if (socket) {
       // Listen for "recordCreated" event
       socket.on("recordCreated", (record) => {
-        setAllDetails(dispatch, [...data, record]);
+        dispatch(setAllDetails([...data, record]));
       });
 
       // Listen for "recordDeleted" event
       socket.on("recordDeleted", (recordId) => {
-        ActionDelete(dispatch, recordId);
+        dispatch(ActionDelete(recordId));
       });
     }
   }, [socket, data, dispatch]);
@@ -54,7 +54,7 @@ const GetComponent = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get("http://localhost:8080/record");
-      setAllDetails(dispatch, response.data);
+      dispatch(setAllDetails(response.data));
     } catch (error) {
       console.error(error);
     }
