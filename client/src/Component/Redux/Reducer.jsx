@@ -16,7 +16,7 @@ const Reducer = (state = initialState, action) => {
       return { ...state, PATCH_ORDER: [...state.PatchData, action.payload] };
 
     case "DELETE":
-      let delete1 = state.AllDetails.filter((e) => e.id !== action.payload);
+      let delete1 = state.AllDetails.filter((e) => e._id !== action.payload);
       return { ...state, AllDetails: delete1 };
 
     default:

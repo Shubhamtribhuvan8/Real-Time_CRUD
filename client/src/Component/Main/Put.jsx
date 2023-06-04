@@ -1,23 +1,26 @@
 import React, { useState } from "react";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  TextField,
+  InputLabel,
+  Input,
+  DialogActions,
+} from "@mui/material";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Input, InputLabel } from "@mui/material";
 import { toast } from "react-toastify";
 
-function PostComponent() {
-  const [username, setUsername] = useState("");
-  const [description, setDescription] = useState("");
+function PutComponent({ _id }) {
   const [open, setOpen] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [dataImage, setDataImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-
+  const [imageUrl, setImageUrl] = useState("");
+  const [imagefinal, setimagedata] = useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -43,6 +46,7 @@ function PostComponent() {
         data
       );
       setImageUrl(response.data.url);
+      setimagedata(response.data.url);
       console.log(response.data.url);
     } catch (error) {
       console.log(error);
@@ -60,12 +64,14 @@ function PostComponent() {
     try {
       await CloudinaryUpload(dataImage);
       const data = {
-        title: username,
+        title: title,
         description: description,
-        images: imageUrl,
+        images: imagefinal,
       };
-      console.log("cloudinary ke andar", imageUrl);
-      const response = await axios.post("http://localhost:8080/record", data);
+      const response = await axios.put(
+        `http://localhost:8080/record/${_id}`,
+        data
+      );
       console.log(response.data);
       toast.success("Post added!");
     } catch (error) {
@@ -83,12 +89,15 @@ function PostComponent() {
     try {
       await CloudinaryUpload(dataImage);
       const data = {
-        title: username,
+        title: title,
         description: description,
         images: imageUrl,
       };
       console.log("cloudinary ke andar", imageUrl);
-      const response = await axios.post("http://localhost:8080/record", data);
+      const response = await axios.put(
+        `http://localhost:8080/record/${_id}`,
+        data
+      );
       console.log(response.data);
       toast.success("Done!");
       setOpen(false);
@@ -99,10 +108,14 @@ function PostComponent() {
   };
 
   return (
-    <div>
+    <>
       <br />
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Post Somethings!
+      <Button
+        variant="outline-dark"
+        style={{ width: "6rem" }}
+        onClick={handleClickOpen}
+      >
+        Edit
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Do Post Something...!</DialogTitle>
@@ -117,8 +130,8 @@ function PostComponent() {
               type="text"
               fullWidth
               variant="standard"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
             />
             <TextField
               margin="dense"
@@ -150,12 +163,11 @@ function PostComponent() {
           </form>
         </DialogContent>
         <DialogActions>
-          {/* <Button onClick={handleClose}>Cancel</Button> */}
-          <Button onClick={handleSecondSubmit}>Close</Button>
+          <Button onClick={handleSecondSubmit}>Close</Button>{" "}
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }
 
-export default PostComponent;
+export default PutComponent;
