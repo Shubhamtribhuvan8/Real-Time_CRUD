@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Card from "@mui/material/Card";
@@ -16,35 +15,9 @@ import PutComponent from "./Put";
 
 const GetComponent = () => {
   const dispatch = useDispatch();
-  const [socket, setSocket] = useState(null);
   const data = useSelector((store) => store.AllDetails);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  useEffect(() => {
-    // Establish a connection with the Socket.IO server
-    const newSocket = io("https://dull-plum-stingray-suit.cyclic.app");
-    setSocket(newSocket);
-
-    // Clean up the socket connection when the component unmounts
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (socket) {
-      // Listen for "recordCreated" event
-      socket.on("recordCreated", (record) => {
-        dispatch(setAllDetails([...data, record]));
-      });
-
-      // Listen for "recordDeleted" event
-      socket.on("recordDeleted", (recordId) => {
-        dispatch(ActionDelete(recordId));
-      });
-    }
-  }, [socket, data, dispatch]);
 
   useEffect(() => {
     fetchData();
@@ -67,7 +40,7 @@ const GetComponent = () => {
       await axios.delete(
         `https://dull-plum-stingray-suit.cyclic.app/record/${_id}`
       );
-      socket.emit("deleteRecord", _id);
+      dispatch(ActionDelete(_id));
       toast.success("Record deleted successfully");
     } catch (error) {
       console.error(error);
@@ -120,3 +93,4 @@ const GetComponent = () => {
 };
 
 export default GetComponent;
+//added all CRUD
