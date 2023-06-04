@@ -24,7 +24,8 @@ const GetComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchData = async () => {
+  const fetchData = async (e) => {
+    e.preventDefault();
     try {
       const response = await axios.get(
         "https://dull-plum-stingray-suit.cyclic.app/record"
@@ -93,4 +94,5 @@ const GetComponent = () => {
 };
 
 export default GetComponent;
-//added all CRUD
+//added all CRUD operations
+//added all CRUD operations
