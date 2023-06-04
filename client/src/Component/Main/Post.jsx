@@ -65,7 +65,10 @@ function PostComponent() {
         images: imageUrl,
       };
       console.log("cloudinary ke andar", imageUrl);
-      const response = await axios.post("http://localhost:8080/record", data);
+      const response = await axios.post(
+        "https://dull-plum-stingray-suit.cyclic.app/record",
+        data
+      );
       console.log(response.data);
       toast.success("Post added!");
     } catch (error) {
@@ -88,7 +91,10 @@ function PostComponent() {
         images: imageUrl,
       };
       console.log("cloudinary ke andar", imageUrl);
-      const response = await axios.post("http://localhost:8080/record", data);
+      const response = await axios.post(
+        "https://dull-plum-stingray-suit.cyclic.app/record",
+        data
+      );
       console.log(response.data);
       toast.success("Done!");
       setOpen(false);

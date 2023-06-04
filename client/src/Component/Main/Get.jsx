@@ -23,7 +23,7 @@ const GetComponent = () => {
 
   useEffect(() => {
     // Establish a connection with the Socket.IO server
-    const newSocket = io("http://localhost:8080");
+    const newSocket = io("https://dull-plum-stingray-suit.cyclic.app");
     setSocket(newSocket);
 
     // Clean up the socket connection when the component unmounts
@@ -53,7 +53,9 @@ const GetComponent = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/record");
+      const response = await axios.get(
+        "https://dull-plum-stingray-suit.cyclic.app/record"
+      );
       dispatch(setAllDetails(response.data));
     } catch (error) {
       console.error(error);
@@ -62,7 +64,9 @@ const GetComponent = () => {
 
   const handleDelete = async (_id) => {
     try {
-      await axios.delete(`http://localhost:8080/record/${_id}`);
+      await axios.delete(
+        `https://dull-plum-stingray-suit.cyclic.app/record/${_id}`
+      );
       socket.emit("deleteRecord", _id);
       toast.success("Record deleted successfully");
     } catch (error) {
