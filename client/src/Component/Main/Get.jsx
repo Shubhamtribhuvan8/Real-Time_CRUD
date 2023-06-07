@@ -7,7 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllDetails, ActionDelete } from "../Redux/Action";
+import { setAllDetails, deleteRecord } from "../Redux/Action";
 import Button from "react-bootstrap/Button";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -23,8 +23,7 @@ const GetComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchData = async (e) => {
-    e.preventDefault();
+  const fetchData = async () => {
     try {
       const response = await axios.get(
         "https://dull-plum-stingray-suit.cyclic.app/record"
@@ -40,14 +39,16 @@ const GetComponent = () => {
       await axios.delete(
         `https://dull-plum-stingray-suit.cyclic.app/record/${_id}`
       );
-      dispatch(ActionDelete(_id));
+      dispatch(deleteRecord(_id));
       toast.success("Record deleted successfully");
     } catch (error) {
       console.error(error);
       toast.error("Failed to delete record");
     }
   };
+
   const data = useSelector((store) => store.AllDetails);
+
   return (
     <div
       style={{
@@ -93,5 +94,3 @@ const GetComponent = () => {
 };
 
 export default GetComponent;
-//added all CRUD operations
-//added all CRUD operations
