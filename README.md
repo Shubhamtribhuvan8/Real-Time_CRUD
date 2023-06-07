@@ -1,5 +1,5 @@
 # Real-Time_CRUD
-# MERN/PERN Stack CRUD Real-Time System
+# MERN Stack CRUD Real-Time System
 
 This is a simple CRUD (Create, Read, Update, Delete) real-time system implemented using the MERN/PERN stack. It allows users to manage records with real-time updates using Socket.io. The system consists of a MongoDB database, Express.js for the backend API, React.js for the frontend, and Node.js as the server runtime.
 # Features
