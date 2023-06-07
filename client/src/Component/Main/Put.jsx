@@ -118,7 +118,7 @@ function PutComponent({ _id }) {
         Edit
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Do Post Something...!</DialogTitle>
+        <DialogTitle>Edit Something...!</DialogTitle>
         <DialogContent>
           <DialogContentText></DialogContentText>
           <form onSubmit={handleSubmit}>
