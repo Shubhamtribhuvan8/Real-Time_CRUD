@@ -77,14 +77,18 @@ const GetComponent = () => {
                 <Typography variant="body2" color="text.secondary">
                   {record.description}
                 </Typography>
-                <Button
-                  variant="outline-dark"
-                  style={{ width: "6rem" }}
-                  onClick={() => handleDelete(record._id)}
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  Delete
-                </Button>
-                <PutComponent _id={record._id} />
+                  <Button
+                    variant="outline-dark"
+                    style={{ width: "6rem" }}
+                    onClick={() => handleDelete(record._id)}
+                  >
+                    Delete
+                  </Button>
+                  <PutComponent _id={record._id} />
+                </div>
               </CardContent>
             </CardActionArea>
           </Card>
